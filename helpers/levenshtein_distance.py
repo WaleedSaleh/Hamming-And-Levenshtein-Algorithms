@@ -54,7 +54,6 @@ class LevenshteinDistance(object):
     def __get_distance(self) -> int:
         """
         This is the method that finds the distance for strings
-        :param:n:int represents the length
         :rtype:int
         """
         rows = self.__get_source_string_length
@@ -70,8 +69,10 @@ class LevenshteinDistance(object):
         for col in range(1, cols):
             for row in range(1, rows):
                 if self.source_string[row-1] == self.destination_string[col-1]:
+                    # When the chars are the same cost is 0.
                     cost = 0
                 else:
+                    # When applying an operation we add an operation.
                     cost = 1
 
                 matrix[row][col] = min(matrix[row-1][col] + 1, matrix[row][col-1] + 1, matrix[row-1][col-1] + cost)
